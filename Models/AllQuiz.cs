@@ -8,18 +8,18 @@ namespace QUIZ_APP.Models
         //**************************************************************************************
         public List<QuizMVC> list { get; set; } = new List<QuizMVC>();
         //**************************************************************************************
-        public void Add(QuizMVC sender)
+        private void Add(QuizMVC sender)
         {
             this.list.Add(sender);
         }
         //**************************************************************************************
-        public void Serialize()
+        private void Serialize()
         {
             string x = JsonSerializer.Serialize<List<QuizMVC>>(this.list);
             File.WriteAllText($"./{save_as}", x);
         }
         //**************************************************************************************
-        public List<QuizMVC> Deserialize()
+        private List<QuizMVC> Deserialize()
         {
             string read_all = File.ReadAllText($"./{save_as}");
             List<QuizMVC>? result = JsonSerializer.Deserialize<List<QuizMVC>>(read_all);
