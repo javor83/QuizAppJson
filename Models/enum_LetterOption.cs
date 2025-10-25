@@ -2,9 +2,9 @@
 {
     public enum enum_LetterOption
     {
-        A,
-        B,
-        C,
-        D
+        A = 100,
+        B = 200,
+        C = 300,
+        D = 400
     }
 }

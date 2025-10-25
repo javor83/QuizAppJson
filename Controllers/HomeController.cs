@@ -18,12 +18,46 @@ namespace QUIZ_APP.Controllers
         //***********************************************************************************
         public IActionResult Index()
         {
+            /*
+            QuizSelect dq = new QuizSelect();
+            QuizMVC mvc = new QuizMVC();
+            mvc.QuizIndex = dq.list.Count + 1;
+            mvc.AddMVC();
+            QuizMVC js = new QuizMVC();
+            js.QuizIndex = dq.list.Count + 1;
+            js.AddJS();
+
+            dq.Add(mvc);dq.Add(js);
+
+            dq.Serialize();
+
+            var x = dq.Deserialize();
+
+            return Json(x);
+            */
+
             return View(this.qselect.GetAll());
         }
+        //***********************************************************************************
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SendAnswer(QuestionDetails sender)
+        {
+            this.qselect.SendAnswer(sender);
+            return RedirectToAction("Details", "Home",
+                new
+                {
+                    quiz_id = sender.QuizID,
+                    question_id = sender.NextQuestionID
+                }
+                );
+        }
+        
         //***********************************************************************************
         public IActionResult Details(int? quiz_id,int? question_id=0)
         {
             QuestionDetails item = this.qselect.GetQuestion(quiz_id, question_id);
+           
 
             if (item == null)
             {

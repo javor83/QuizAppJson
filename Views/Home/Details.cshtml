@@ -1,29 +1,95 @@
 ﻿@model QuestionDetails 
+@{
+    var option_list = Model.CurrentQuestion.data_questions;
+}
 <h1 class="text-center">@Model.QuizTitle</h1>
 <h3>@Model.CurrentQuestion.HeaderIndex. @Model.CurrentQuestion.HeaderText</h3>
-    @for (int k = 0;k<Model.CurrentQuestion.data_questions.Count;k++)
+    <form method="post" asp-controller="Home" asp-action="SendAnswer" asp-antiforgery="true">
+       
+        <input type="hidden" asp-for="@Model.QuizID"/>
+        <input type="hidden" asp-for="@Model.QuestionID" />
+        <input type="hidden" asp-for="@Model.NextQuestionID" />
+   
+       
+    @for (int k = 0; k < option_list.Count(); k++)
     {
-    <div class="form-check">
-        @if (k == 0)
-        {
-            <input type="radio" class="form-check-input" id="@string.Format("radio{0}",k)" name="optradio" checked>
-        }else
-        {
-            <input type="radio" class="form-check-input" id="@string.Format("radio{0}", k)" name="optradio">
-        }
+        <div class="form-check">
+            @switch (Model.CurrentQuestion.AnswerExists())
+            {
+                case true:
+                    if (option_list.ElementAt(k).Answer)
+                    {
+                        <input type="radio"
+                               class="form-check-input"
+                               name="SelectedLetter"
+                               id="SelectedLetter[@k]"
+                               value="@Convert.ToInt32(option_list.ElementAt(k).Letter)"
+                               checked>
+                    }
+                    else
+                    {
+                        <input type="radio"
+                               class="form-check-input"
+                               name="SelectedLetter"
+                               id="SelectedLetter[@k]"
+                               value="@Convert.ToInt32(option_list.ElementAt(k).Letter)">
+                    }
+                    break;
+                case false:
+                    @if (option_list.ElementAt(k).Letter == Model.SelectedLetter)
+                    {
+                        <input type="radio"
+                               class="form-check-input"
+                               name="SelectedLetter"
+                               id="SelectedLetter[@k]"
+                               value="@Convert.ToInt32(option_list.ElementAt(k).Letter)"
+                               checked>
 
-        <b>@Model.CurrentQuestion.data_questions[k].Letter.</b> @Model.CurrentQuestion.data_questions[k].QuestionText
-        <label class="form-check-label" for="@string.Format("radio{0}", k)"></label>
+                    }
+                    else
+                    {
+                        <input type="radio"
+                               class="form-check-input"
+                               name="SelectedLetter"
+                               id="SelectedLetter[@k]"
+                               value="@Convert.ToInt32(option_list.ElementAt(k).Letter)">
 
-        
-          </div>
+                    }
+                    break;
+            }
+            
+
+           
+            
+            
+        <label class="form-check-label" for="SelectedLetter[@k]">
+            <b>@option_list.ElementAt(k).Letter.</b> @option_list.ElementAt(k).QuestionText
+        </label>
+        </div>
     }
+
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary d-inline" value="@captions.SendAnswer" />
+        </div>
+        
+    </form>
+
+    
 <p class="progress_ask">
     @string.Format(captions.ProgressOf, Model.IndexOnScreen, @Model.TotalCount)
 </p>
-<p>
+<div class="text-center">
+    <form method="post" asp-controller="Home" asp-action="Reset">
+        <input type="submit" class="btn btn-primary d-inline" value="@captions.ResetAnswer" />
+        <a asp-action="Details"
+        asp-controller="Home" asp-route-quiz_id="@Model.QuizID"
+           class="btn btn-outline-primary d-inline" asp-route-question_id="@Model.PreviousQuestionID">@captions.Previos</a>
+        <a asp-action="Details" asp-controller="Home" 
+        asp-route-quiz_id="@Model.QuizID"
+           class="btn btn-outline-primary d-inline" 
+           asp-route-question_id="@Model.NextQuestionID">@captions.Next</a>
+    </form>
     
-    <input type="submit" class="btn btn-primary" value="@captions.ResetAnswer"/>
-    <a asp-action="Details" asp-controller="Home" asp-route-quiz_id="@Model.QuizID" class="btn btn-outline-primary" asp-route-question_id="@Model.PreviousQuestionID">@captions.Previos</a>
-    <a asp-action="Details" asp-controller="Home" asp-route-quiz_id="@Model.QuizID" class="btn btn-outline-primary" asp-route-question_id="@Model.NextQuestionID">@captions.Next</a>
-</p>
+</div>
+
+    

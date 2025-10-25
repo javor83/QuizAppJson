@@ -10,6 +10,7 @@ namespace QUIZ_APP.Models
         //**************************************************************************************
         public QuizSelect()
         {
+            
             this.list = new List<QuizMVC>();
             var json = this.Deserialize();
             this.list.AddRange(json);
@@ -39,24 +40,34 @@ namespace QUIZ_APP.Models
             return result;
         }
         //**************************************************************************************
-        private void Add(QuizMVC sender)
+        public void Add(QuizMVC sender)
         {
             this.list.Add(sender);
         }
         //**************************************************************************************
-        private void Serialize()
+        public void Serialize()
         {
             string x = JsonSerializer.Serialize<List<QuizMVC>>(this.list);
             File.WriteAllText($"./{save_as}", x);
         }
         //**************************************************************************************
-        private List<QuizMVC> Deserialize()
+        public List<QuizMVC> Deserialize()
         {
             string read_all = File.ReadAllText($"./{save_as}");
             List<QuizMVC>? result = JsonSerializer.Deserialize<List<QuizMVC>>(read_all);
             return result;
         }
         #endregion
+        //**************************************************************************************
+        void IQuizSelect.SendAnswer(QuestionDetails sender)
+        {
+            
+
+            QuizMVC mvc = this.list.ElementAt(sender.QuizID);
+            QuestionOptionList item = mvc.quiz_questions.ElementAt(sender.QuestionID);
+            item.SetLetter(sender.SelectedLetter);
+        }
+
         //**************************************************************************************
         void IQuizSelect.ResetAnswer()
         {
@@ -82,9 +93,12 @@ namespace QUIZ_APP.Models
                         CurrentQuestion = question,
                         TotalCount = total,
                         IndexOnScreen = question_id.Value + 1,
+                        //------------------
                         QuestionID = question_id.Value,
+                        //------------------
+                        QuizID = quiz_id.Value,
                         QuizTitle = quiz.QuizTitle,
-                        QuizID = quiz_id.Value
+                        SelectedLetter = question.data_questions.First().Letter
                     };
                     if (result.QuestionID == total-1)
                     {

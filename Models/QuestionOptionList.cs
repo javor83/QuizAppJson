@@ -14,6 +14,29 @@ namespace QUIZ_APP.Models
             }
         }
         //************************************************************************************
+        public void SetLetter(enum_LetterOption selected)
+        {
+            var query = this.data_questions.Where(x => x.Letter == selected).First();
+            query.Answer = true;
+
+
+        }
+        //************************************************************************************
+        public OptionsInQuestion FirstAnswer()
+        {
+            var query = this.data_questions.Where(x => x.Answer == true).First();
+            return query;
+        }
+        //************************************************************************************
+        public bool AnswerExists()
+        {
+            var query = this.data_questions.Any(x=>x.Answer == true);
+            return query;
+
+
+        }
+
+        //************************************************************************************
         //възможни отговори...
         public List<OptionsInQuestion> data_questions { get; set; } = new List<OptionsInQuestion>();
         //************************************************************************************
