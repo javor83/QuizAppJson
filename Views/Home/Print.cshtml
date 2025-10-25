@@ -1,2 +1,14 @@
 ﻿@model QuizMVC
-<b>@Model.CountCorrect()</b>
+<table border="1">
+@foreach (var k in Model.CountCorrect())
+{
+     
+         <tr>
+             <td>@k.Letter</td>
+             <td>@k.QuestionText</td>
+             <td>@k.AnswerLetter</td>
+            <td>predefined @k.Correct</td>
+         </tr>
+     
+}
+</table>

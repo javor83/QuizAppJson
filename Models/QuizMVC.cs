@@ -4,10 +4,12 @@ namespace QUIZ_APP.Models
 {
     public class QuizMVC
     {
-        public int CountCorrect()
+
+        //************************************************************************************
+        public IEnumerable<OptionsInQuestion> CountCorrect()
         {
             var result =
-                this.quiz_questions.SelectMany(x => x.data_questions).Where(x=>x.Letter == enum_LetterOption.A).Count();
+                this.quiz_questions.SelectMany(x => x.data_questions);
             return result;
         }
         //************************************************************************************
