@@ -8,10 +8,12 @@ namespace QUIZ_APP.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IQuizSelect qselect = null;
         //***********************************************************************************
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IQuizSelect quiz)
         {
-            _logger = logger;
+            this.qselect = qselect;
+            this._logger = logger;
         }
         //***********************************************************************************
         public IActionResult Index()

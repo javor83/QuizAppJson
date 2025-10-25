@@ -8,6 +8,15 @@ namespace QUIZ_APP.Models
         //**************************************************************************************
         public List<QuizMVC> list { get; set; } = new List<QuizMVC>();
         //**************************************************************************************
+        public QuizSelect()
+        {
+            this.list = new List<QuizMVC>();
+            var json = this.Deserialize();
+            this.list.AddRange(json);
+            
+        }
+
+        //**************************************************************************************
         private void Add(QuizMVC sender)
         {
             this.list.Add(sender);
