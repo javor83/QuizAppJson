@@ -21,7 +21,8 @@ namespace QUIZ_APP.Models
         //**************************************************************************************
         public List<QuizMVC> Deserialize()
         {
-            List<QuizMVC> result = JsonSerializer.Deserialize<List<QuizMVC>>(File.ReadAllText($"./{save_as}");
+            string read_all = File.ReadAllText($"./{save_as}");
+            List<QuizMVC>? result = JsonSerializer.Deserialize<List<QuizMVC>>(read_all);
             return result;
         }
         //**************************************************************************************
