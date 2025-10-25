@@ -12,13 +12,27 @@ namespace QUIZ_APP.Controllers
         //***********************************************************************************
         public HomeController(ILogger<HomeController> logger,IQuizSelect quiz)
         {
-            this.qselect = qselect;
+            this.qselect = quiz;
             this._logger = logger;
         }
         //***********************************************************************************
         public IActionResult Index()
         {
-            return Json(new { id = 1,ok = true});
+            return View(this.qselect.GetAll());
+        }
+        //***********************************************************************************
+        public IActionResult Details(int? quiz_id,int? question_id=0)
+        {
+            QuestionDetails item = this.qselect.GetQuestion(quiz_id, question_id);
+
+            if (item == null)
+            {
+                return NotFound("element found");
+            }
+            else
+            {
+                return View(item);
+            }
         }
         //***********************************************************************************
         public IActionResult Privacy()

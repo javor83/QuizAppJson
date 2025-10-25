@@ -1,0 +1,9 @@
+﻿@model QuestionDetails 
+<p>@Model.CurrentQuestion.HeaderIndex. @Model.CurrentQuestion.HeaderText | @Model.IndexOnScreen of @Model.TotalCount</p>
+
+    @foreach (var k in Model.CurrentQuestion.data_questions)
+    {
+          <div>
+          <input type="radio" name="quiz_item" />@k.QuestionText
+          </div>
+    }

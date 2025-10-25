@@ -15,7 +15,29 @@ namespace QUIZ_APP.Models
             this.list.AddRange(json);
             
         }
+        #region privates
+        //**************************************************************************************
+        private QuizMVC Find(int? id)
+        {
+            QuizMVC result = null;
 
+            if (id.HasValue)
+            {
+                if (id.Value >= 0 && id.Value <= this.list.Count() - 1)
+                {
+                    result = this.list.ElementAt(id.Value);
+                }
+                else
+                    result = null;
+            }
+            else
+            {
+                result = null;
+            }
+
+
+            return result;
+        }
         //**************************************************************************************
         private void Add(QuizMVC sender)
         {
@@ -34,36 +56,45 @@ namespace QUIZ_APP.Models
             List<QuizMVC>? result = JsonSerializer.Deserialize<List<QuizMVC>>(read_all);
             return result;
         }
+        #endregion
+        //**************************************************************************************
+        QuestionDetails IQuizSelect.GetQuestion(int? quiz_id, int? question_id)
+        {
+            QuestionDetails result = null;
+            QuizMVC quiz = this.Find(quiz_id);
+            if (quiz != null)
+            {
+                var question = quiz.Find(question_id);
+                if (question != null)
+                {
+                    int total = quiz.quiz_questions.Count();
+                    result = new QuestionDetails()
+                    {
+                        CurrentQuestion = question,
+                        TotalCount = total,
+                        IndexOnScreen = question_id.Value + 1
+                    };
+                }
+                else
+                {
+                    result = null;
+                }
+                    
+
+
+            }
+            else
+            {
+                result = null;
+            }
+            return result;
+        }
         //**************************************************************************************
 
         List<QuizMVC> IQuizSelect.GetAll()
         {
             return this.list;
         }
-
-        //**************************************************************************************
-        QuizMVC IQuizSelect.GetIndex(int? id)
-        {
-            QuizMVC result = null;
-
-            if (id.HasValue)
-            {
-                if (id >= 0 && id <= this.list.Count - 1)
-                {
-                    result = this.list.ElementAt(id.Value);
-                }else
-                {
-                    result = null;
-                }
-            }
-            else
-            {
-                result = null;
-            }
-
-            return result;
-        }
-
         //**************************************************************************************
 
     }

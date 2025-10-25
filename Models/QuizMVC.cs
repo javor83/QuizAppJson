@@ -229,6 +229,30 @@ namespace QUIZ_APP.Models
         public string QuizTitle { get; set; }
         //************************************************************************************
         public int QuizIndex { get; set; }
+        //************************************************************************************
+        public QuestionOptionList Find(int? id)
+        {
+            QuestionOptionList result = null;
+
+            if (id.HasValue)
+            {
+                if (id.Value >= 0 && id.Value <= quiz_questions.Count() - 1)
+                {
+                    result = quiz_questions.ElementAt(id.Value);
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = null;
+            }
+
+            return result;
+        }
+        //************************************************************************************
         public List<QuestionOptionList> quiz_questions { get; set; } = new List<QuestionOptionList>();
         //************************************************************************************
         public override string ToString()

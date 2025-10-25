@@ -2,8 +2,12 @@
 {
     public interface IQuizSelect
     {
-        QuizMVC GetIndex(int? id);
+        
 
         List<QuizMVC> GetAll();
+
+
+
+        QuestionDetails GetQuestion(int? quiz_id, int? question_id);
     }
 }
