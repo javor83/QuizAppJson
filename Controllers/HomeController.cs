@@ -1,6 +1,4 @@
 using System.Diagnostics;
-using System.Text.Json;
-using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Mvc;
 using QUIZ_APP.Models;
 

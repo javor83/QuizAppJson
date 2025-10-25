@@ -8,7 +8,7 @@ namespace QUIZ_APP.Models
         //************************************************************************************
         public IEnumerable<OptionsInQuestion> CountCorrect()
         {
-            var result =
+            var result = 
                 this.quiz_questions.SelectMany(x => x.data_questions);
             return result;
         }
