@@ -2,7 +2,7 @@
 
 namespace QUIZ_APP.Models
 {
-    public class AllQuiz
+    public class AllQuiz: IQuizSelect
     {
         public string save_as = "quiz.json";
         //**************************************************************************************
@@ -25,6 +25,36 @@ namespace QUIZ_APP.Models
             List<QuizMVC>? result = JsonSerializer.Deserialize<List<QuizMVC>>(read_all);
             return result;
         }
+        //**************************************************************************************
+
+        List<QuizMVC> IQuizSelect.GetAll()
+        {
+            return this.list;
+        }
+
+        //**************************************************************************************
+        QuizMVC IQuizSelect.GetIndex(int? id)
+        {
+            QuizMVC result = null;
+
+            if (id.HasValue)
+            {
+                if (id >= 0 && id <= this.list.Count - 1)
+                {
+                    result = this.list.ElementAt(id.Value);
+                }else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         //**************************************************************************************
 
     }

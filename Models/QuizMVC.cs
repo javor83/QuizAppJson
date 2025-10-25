@@ -4,6 +4,10 @@ namespace QUIZ_APP.Models
 {
     public class QuizMVC
     {
+
+        //************************************************************************************
+        public string QuizTitle { get; set; }
+        //************************************************************************************
         public int QuizIndex { get; set; }
         public List<QuestionOptionList> quiz_questions { get; set; } = new List<QuestionOptionList>();
         //************************************************************************************
