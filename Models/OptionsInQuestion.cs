@@ -5,12 +5,12 @@
         public void ResetAnswer()
         {
             this.Answer = false;
-            this.AnswerLetter = enum_LetterOption.A;
+            this.AnswerLetter = enum_LetterOption.None;
         }
         
         public bool Answer { get; set; } = false;
         //************************************************************************************
-        public enum_LetterOption AnswerLetter { get; set; } = enum_LetterOption.A;
+        public enum_LetterOption AnswerLetter { get; set; } = enum_LetterOption.None;
         //************************************************************************************
         //под каква буква се показва
         public enum_LetterOption Letter { get; set; }

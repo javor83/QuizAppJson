@@ -81,6 +81,14 @@ namespace QUIZ_APP.Controllers
 
                 
         }
+        //***********************************************************************************
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Reset()
+        {
+            this.qselect.ResetAnswer();
+            return RedirectToAction("Index", "Home");
+        }
 
         //***********************************************************************************
         public IActionResult Details(int? quiz_id,int? question_id=0)

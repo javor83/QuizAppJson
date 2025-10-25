@@ -1,5 +1,11 @@
 ﻿@model QuizMVC
-<table border="1">
+<h1 class="text-center">@captions.AnswerList</h1>
+<table border="1" class="table table-bordered table-hover">
+    <tr>
+        <th>@captions.QLetter</th>
+        <th>@captions.QText</th>
+        <th>@captions.QAnsweredLetter</th>
+    </tr>
 @foreach (var k in Model.CountCorrect())
 {
      
@@ -7,7 +13,7 @@
              <td>@k.Letter</td>
              <td>@k.QuestionText</td>
              <td>@k.AnswerLetter</td>
-            <td>predefined @k.Correct</td>
+           
          </tr>
      
 }
