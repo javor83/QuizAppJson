@@ -6,6 +6,9 @@ namespace QUIZ_APP.Models
 {
     public class QuestionDetails
     {
+        
+        
+        //*****************************************************************************************
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -19,24 +22,32 @@ namespace QUIZ_APP.Models
             sb.Append($"CurrentQuestion {this.CurrentQuestion.ToString()}").AppendLine();
             return sb.ToString();
         }
-
-     
+        //*****************************************************************************************
+        public bool IsFinished()
+        {
+            return this.IndexOnScreen == this.TotalCount;
+        }
+     //*****************************************************************************************
 
         public QuestionOptionList CurrentQuestion { get; set; }
+        //*****************************************************************************************
         public int TotalCount { get; set; }
-
+        //*****************************************************************************************
         public int IndexOnScreen { get; set; }
+        //*****************************************************************************************
 
         public string QuizTitle { get; set; }
-
+        //*****************************************************************************************
         public int QuizID { get; set; }
-
+        //*****************************************************************************************
         public int QuestionID { get; set; }
-
+        //*****************************************************************************************
 
         public int NextQuestionID { get; set; }
+        //*****************************************************************************************
         public int PreviousQuestionID { get; set; }
-
+        //*****************************************************************************************
         public enum_LetterOption SelectedLetter { get; set; }
+        //*****************************************************************************************
     }
 }

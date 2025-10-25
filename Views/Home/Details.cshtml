@@ -5,11 +5,12 @@
 <h1 class="text-center">@Model.QuizTitle</h1>
 <h3>@Model.CurrentQuestion.HeaderIndex. @Model.CurrentQuestion.HeaderText</h3>
     <form method="post" asp-controller="Home" asp-action="SendAnswer" asp-antiforgery="true">
-       
-        <input type="hidden" asp-for="@Model.QuizID"/>
-        <input type="hidden" asp-for="@Model.QuestionID" />
-        <input type="hidden" asp-for="@Model.NextQuestionID" />
-   
+
+     <input type="hidden" asp-for="@Model.QuizID" />
+    <input type="hidden" asp-for="@Model.QuestionID" />
+    <input type="hidden" asp-for="@Model.NextQuestionID" />
+    <input type="hidden" asp-for="@Model.TotalCount" />
+    <input type="hidden" asp-for="@Model.IndexOnScreen" />
        
     @for (int k = 0; k < option_list.Count(); k++)
     {
@@ -57,11 +58,6 @@
                     }
                     break;
             }
-            
-
-           
-            
-            
         <label class="form-check-label" for="SelectedLetter[@k]">
             <b>@option_list.ElementAt(k).Letter.</b> @option_list.ElementAt(k).QuestionText
         </label>

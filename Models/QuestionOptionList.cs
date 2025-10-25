@@ -16,17 +16,14 @@ namespace QUIZ_APP.Models
         //************************************************************************************
         public void SetLetter(enum_LetterOption selected)
         {
-            var query = this.data_questions.Where(x => x.Letter == selected).First();
+            OptionsInQuestion query = this.data_questions.Where(x => x.Letter == selected).First();
             query.Answer = true;
+            query.AnswerLetter = selected;
+
 
 
         }
-        //************************************************************************************
-        public OptionsInQuestion FirstAnswer()
-        {
-            var query = this.data_questions.Where(x => x.Answer == true).First();
-            return query;
-        }
+      
         //************************************************************************************
         public bool AnswerExists()
         {

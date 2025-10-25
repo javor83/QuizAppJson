@@ -17,8 +17,28 @@ namespace QUIZ_APP.Models
             
         }
         #region privates
+        
         //**************************************************************************************
-        private QuizMVC Find(int? id)
+        public void Add(QuizMVC sender)
+        {
+            this.list.Add(sender);
+        }
+        //**************************************************************************************
+        public void Serialize()
+        {
+            string x = JsonSerializer.Serialize<List<QuizMVC>>(this.list);
+            File.WriteAllText($"./{save_as}", x);
+        }
+        //**************************************************************************************
+        public List<QuizMVC> Deserialize()
+        {
+            string read_all = File.ReadAllText($"./{save_as}");
+            List<QuizMVC>? result = JsonSerializer.Deserialize<List<QuizMVC>>(read_all);
+            return result;
+        }
+        #endregion
+        //**************************************************************************************
+        QuizMVC IQuizSelect.Find(int? id)
         {
             QuizMVC result = null;
 
@@ -39,25 +59,6 @@ namespace QUIZ_APP.Models
 
             return result;
         }
-        //**************************************************************************************
-        public void Add(QuizMVC sender)
-        {
-            this.list.Add(sender);
-        }
-        //**************************************************************************************
-        public void Serialize()
-        {
-            string x = JsonSerializer.Serialize<List<QuizMVC>>(this.list);
-            File.WriteAllText($"./{save_as}", x);
-        }
-        //**************************************************************************************
-        public List<QuizMVC> Deserialize()
-        {
-            string read_all = File.ReadAllText($"./{save_as}");
-            List<QuizMVC>? result = JsonSerializer.Deserialize<List<QuizMVC>>(read_all);
-            return result;
-        }
-        #endregion
         //**************************************************************************************
         void IQuizSelect.SendAnswer(QuestionDetails sender)
         {
@@ -81,7 +82,7 @@ namespace QUIZ_APP.Models
         QuestionDetails IQuizSelect.GetQuestion(int? quiz_id, int? question_id)
         {
             QuestionDetails result = null;
-            QuizMVC quiz = this.Find(quiz_id);
+            QuizMVC quiz = (this as IQuizSelect).Find(quiz_id);
             if (quiz != null)
             {
                 var question = quiz.Find(question_id);

@@ -11,5 +11,7 @@
         QuestionDetails GetQuestion(int? quiz_id, int? question_id);
 
         void SendAnswer(QuestionDetails sender);
+
+        QuizMVC Find(int? id);
     }
 }

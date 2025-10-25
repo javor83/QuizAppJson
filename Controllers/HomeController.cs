@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Text.Json;
+using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Mvc;
 using QUIZ_APP.Models;
 
@@ -44,15 +45,43 @@ namespace QUIZ_APP.Controllers
         public IActionResult SendAnswer(QuestionDetails sender)
         {
             this.qselect.SendAnswer(sender);
-            return RedirectToAction("Details", "Home",
-                new
-                {
-                    quiz_id = sender.QuizID,
-                    question_id = sender.NextQuestionID
-                }
-                );
+            if (sender.IsFinished())
+            {
+                return RedirectToAction("Print", "Home",new { quiz_id = sender.QuizID });
+            }else
+
+                return RedirectToAction("Details", "Home",
+                    new
+                    {
+                        quiz_id = sender.QuizID,
+                        question_id = sender.NextQuestionID
+                    }
+                    );
+
         }
-        
+        //***********************************************************************************
+        public IActionResult Print(int? quiz_id)
+        {
+            if (quiz_id.HasValue)
+            {
+                QuizMVC find = this.qselect.Find(quiz_id);
+                if (find != null)
+                {
+                    return View(find);
+                }
+                else
+                {
+                    return NotFound("not found");
+                }
+            }
+            else
+            {
+                return NotFound("not found");
+            }
+
+                
+        }
+
         //***********************************************************************************
         public IActionResult Details(int? quiz_id,int? question_id=0)
         {

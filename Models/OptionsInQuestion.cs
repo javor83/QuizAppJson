@@ -5,8 +5,12 @@
         public void ResetAnswer()
         {
             this.Answer = false;
+            this.AnswerLetter = enum_LetterOption.A;
         }
-        public bool Answer { get; set; }
+        
+        public bool Answer { get; set; } = false;
+        //************************************************************************************
+        public enum_LetterOption AnswerLetter { get; set; } = enum_LetterOption.A;
         //************************************************************************************
         //под каква буква се показва
         public enum_LetterOption Letter { get; set; }
@@ -16,6 +20,7 @@
         //************************************************************************************
         //дали е верен
         public bool Correct { get; set; }
+       
         //************************************************************************************
 
         public override string ToString()
