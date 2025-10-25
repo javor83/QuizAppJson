@@ -2,7 +2,7 @@
 
 namespace QUIZ_APP.Models
 {
-    public class AllQuiz: IQuizSelect
+    public class QuizSelect: IQuizSelect
     {
         public string save_as = "quiz.json";
         //**************************************************************************************

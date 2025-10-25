@@ -1,3 +1,5 @@
+using QUIZ_APP.Models;
+
 namespace QUIZ_APP
 {
     public class Program
@@ -8,6 +10,8 @@ namespace QUIZ_APP
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IQuizSelect, QuizSelect>();
+
 
             var app = builder.Build();
 
