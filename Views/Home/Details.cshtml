@@ -1,9 +1,29 @@
 ﻿@model QuestionDetails 
-<p>@Model.CurrentQuestion.HeaderIndex. @Model.CurrentQuestion.HeaderText | @Model.IndexOnScreen of @Model.TotalCount</p>
-
-    @foreach (var k in Model.CurrentQuestion.data_questions)
+<h1 class="text-center">@Model.QuizTitle</h1>
+<h3>@Model.CurrentQuestion.HeaderIndex. @Model.CurrentQuestion.HeaderText</h3>
+    @for (int k = 0;k<Model.CurrentQuestion.data_questions.Count;k++)
     {
-          <div>
-          <input type="radio" name="quiz_item" />@k.QuestionText
+    <div class="form-check">
+        @if (k == 0)
+        {
+            <input type="radio" class="form-check-input" id="@string.Format("radio{0}",k)" name="optradio" checked>
+        }else
+        {
+            <input type="radio" class="form-check-input" id="@string.Format("radio{0}", k)" name="optradio">
+        }
+
+        <b>@Model.CurrentQuestion.data_questions[k].Letter.</b> @Model.CurrentQuestion.data_questions[k].QuestionText
+        <label class="form-check-label" for="@string.Format("radio{0}", k)"></label>
+
+        
           </div>
     }
+<p class="progress_ask">
+    @string.Format(captions.ProgressOf, Model.IndexOnScreen, @Model.TotalCount)
+</p>
+<p>
+    
+    <input type="submit" class="btn btn-primary" value="@captions.ResetAnswer"/>
+    <a asp-action="Details" asp-controller="Home" asp-route-quiz_id="@Model.QuizID" class="btn btn-outline-primary" asp-route-question_id="@Model.PreviousQuestionID">@captions.Previos</a>
+    <a asp-action="Details" asp-controller="Home" asp-route-quiz_id="@Model.QuizID" class="btn btn-outline-primary" asp-route-question_id="@Model.NextQuestionID">@captions.Next</a>
+</p>

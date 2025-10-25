@@ -7,7 +7,7 @@
         List<QuizMVC> GetAll();
 
 
-
+        void ResetAnswer();
         QuestionDetails GetQuestion(int? quiz_id, int? question_id);
     }
 }

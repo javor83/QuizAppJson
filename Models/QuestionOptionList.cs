@@ -4,6 +4,15 @@ namespace QUIZ_APP.Models
 {
     public class QuestionOptionList
     {
+
+        //************************************************************************************
+        public void ResetAnswer()
+        {
+            for(int i = 0;i<this.data_questions.Count;i++)
+            {
+                this.data_questions.ElementAt(i).ResetAnswer();
+            }
+        }
         //************************************************************************************
         //възможни отговори...
         public List<OptionsInQuestion> data_questions { get; set; } = new List<OptionsInQuestion>();

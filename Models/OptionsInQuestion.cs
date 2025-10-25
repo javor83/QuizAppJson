@@ -2,7 +2,11 @@
 {
     public class OptionsInQuestion
     {
-
+        public void ResetAnswer()
+        {
+            this.Answer = false;
+        }
+        public bool Answer { get; set; }
         //************************************************************************************
         //под каква буква се показва
         public enum_LetterOption Letter { get; set; }

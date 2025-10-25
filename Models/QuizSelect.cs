@@ -58,6 +58,15 @@ namespace QUIZ_APP.Models
         }
         #endregion
         //**************************************************************************************
+        void IQuizSelect.ResetAnswer()
+        {
+            for(int i = 0;i<this.list.Count;i++)
+            {
+                this.list.ElementAt(i).ResetAnswer();
+            }
+        }
+
+        //**************************************************************************************
         QuestionDetails IQuizSelect.GetQuestion(int? quiz_id, int? question_id)
         {
             QuestionDetails result = null;
@@ -72,8 +81,29 @@ namespace QUIZ_APP.Models
                     {
                         CurrentQuestion = question,
                         TotalCount = total,
-                        IndexOnScreen = question_id.Value + 1
+                        IndexOnScreen = question_id.Value + 1,
+                        QuestionID = question_id.Value,
+                        QuizTitle = quiz.QuizTitle,
+                        QuizID = quiz_id.Value
                     };
+                    if (result.QuestionID == total-1)
+                    {
+                        result.NextQuestionID = total - 1;//адресираме последния елемент
+                        
+                    }
+                    else
+                    {
+                        result.NextQuestionID = result.QuestionID + 1;
+                        
+                    }
+                    if (result.QuestionID == 0)
+                    {
+                        result.PreviousQuestionID = 0;
+                    }
+                    else
+                    {
+                        result.PreviousQuestionID = result.QuestionID - 1;
+                    }
                 }
                 else
                 {

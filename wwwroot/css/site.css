@@ -26,6 +26,18 @@ html {
         color:red;
     }
 
+    .progress_ask
+    {
+        text-align:center;
+        display:block;
+        padding:10px;
+        font-weight:bold;
+    }
+
+.question_item {
+    margin-bottom:10px;
+}
+
 html {
     position: relative;
     min-height: 100%;

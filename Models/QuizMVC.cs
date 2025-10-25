@@ -265,6 +265,14 @@ namespace QUIZ_APP.Models
             return sb.ToString();
         }
         //************************************************************************************
+        public void ResetAnswer()
+        {
+            for (int i = 0; i < this.quiz_questions.Count; i++)
+            {
+                this.quiz_questions.ElementAt(i).ResetAnswer();
+            }
+        }
+        //************************************************************************************
 
         public void Add
             (
