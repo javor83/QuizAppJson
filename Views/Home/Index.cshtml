@@ -4,5 +4,7 @@
     <a asp-controller="Home"
        asp-action="Details"
        asp-route-quiz_id="@k"
-       asp-route-question_id="0" class="app_quiz_select"> @Model.ElementAt(k).QuizTitle</a>
+       asp-route-question_id="0"
+       class="alert alert-success mt-2 d-block text-center text-decoration-none"> @Model.ElementAt(k).QuizTitle
+       </a>
 }

@@ -1,6 +1,43 @@
 ﻿@model QuizMVC
 <h1 class="text-center">@captions.AnswerList</h1>
 <h3>@captions.CountCorrect : @Model.CountAsCorrect()</h3>
+<h3>@captions.CountInCorrect : @Model.CountAsIncorrect()</h3>
+@switch(Model.PrintRating())
+{
+    case enum_Rating.TryAgain:
+        <p class="alert alert-danger">
+            @captions.RatingFail
+        </p>
+        foreach (QuestionOptionList k in Model.quiz_questions)
+        {
+            <p>
+                @k.HeaderIndex. @k.HeaderText
+            </p>
+            <ul>
+                @foreach (OptionsInQuestion question in k.data_questions)
+                {
+                    @if (question.CountAsCorrect())
+                    {
+                        <li class="text-success">@question.Letter. @question.QuestionText</li>
+                    }
+                    else
+                    {
+                        <li class="text-danger">@question.Letter. @question.QuestionText</li>
+                    }
+                }
+
+            </ul>
+        }
+        break;
+        case enum_Rating.Great:
+        <p class="alert alert-success">
+            @captions.RatingOK
+        </p>
+       
+        break;
+}
+
+
 <div class="text-center">
     <form asp-antiforgery="true" method="post" asp-controller="Home" asp-action="Reset">
         <input type="submit" value="@captions.ResetAnswer" class="btn btn-primary d-inline"/>

@@ -289,7 +289,31 @@ namespace QUIZ_APP.Models
             }
             return result;
         }
-
+        //************************************************************************************
+        public int CountAsIncorrect()
+        {
+            int result = 0;
+            foreach (var k in this.quiz_questions)
+            {
+                result += k.CountAsIncorrect();
+            }
+            return result;
+        }
+        //************************************************************************************
+        public enum_Rating PrintRating()
+        {
+            enum_Rating result = enum_Rating.TryAgain;
+            if (this.CountAsIncorrect() == 0)
+            {
+                result = enum_Rating.Great;
+            }
+            return result;
+        }
+        //************************************************************************************
+        public bool IncorrectExists()
+        {
+            return this.CountAsIncorrect() > 0;
+        }
 
         //************************************************************************************
 

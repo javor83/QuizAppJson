@@ -11,9 +11,9 @@
 
         public const string AnswerList = "Правилни отговори";
         public const string CountCorrect = "Брой правилни отговори";
-
-        public const string QLetter = "Буква";
-        public const string QText = "Въпрос";
-        public const string QAnsweredLetter = "Въведена буква";
+        public const string CountInCorrect = "Брой неправилни отговори";
+        public const string RatingOK = "Отлична работа !";
+        public const string RatingFail = "Има нужда от още работа";
+        
     }
 }

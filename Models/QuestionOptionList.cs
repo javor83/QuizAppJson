@@ -24,6 +24,20 @@ namespace QUIZ_APP.Models
             return result;
         }
         //************************************************************************************
+        public int CountAsIncorrect()
+        {
+            int result = 0;
+            if (this.CountAsCorrect() > 0)
+            {
+                result = 0;
+            }
+            else
+            {
+                result = 1;
+            }
+            return result;
+        }
+        //************************************************************************************
         public void SetLetter(enum_LetterOption selected)
         {
             OptionsInQuestion query = this.data_questions.Where(x => x.Letter == selected).First();
