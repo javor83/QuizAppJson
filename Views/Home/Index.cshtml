@@ -1,40 +1,8 @@
 ﻿@model IEnumerable<QuizMVC>
-
-
-
-
-
-@for(var k = 0; k< Model.Count();k++)
+@for(var k = 0;k< Model.Count();k++)
 {
-
-   
-    @if (k == 0)
-    {
-
-
-        <a asp-controller="Home"
-        asp-action="Details" 
-        asp-route-quiz_id="@k"
-        asp-route-question_id = "0" class="app_quiz_select">
-               
-                @Model.ElementAt(k).QuizTitle
-            </a>
-            
-        
-
-    }
-    else
-    {
-
-
-        <a asp-controller="Home" 
-        asp-action="Details"
-        asp-route-quiz_id="@k"
-        asp-route-question_id="0" class="app_quiz_select">
-            @Model.ElementAt(k).QuizTitle
-            </a>
-        
-
-    }
-
+    <a asp-controller="Home"
+       asp-action="Details"
+       asp-route-quiz_id="@k"
+       asp-route-question_id="0" class="app_quiz_select"> @Model.ElementAt(k).QuizTitle</a>
 }

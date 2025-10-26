@@ -67,6 +67,8 @@ namespace QUIZ_APP.Models
             QuizMVC mvc = this.list.ElementAt(sender.QuizID);
             QuestionOptionList item = mvc.quiz_questions.ElementAt(sender.QuestionID);
             item.SetLetter(sender.SelectedLetter);
+
+            Console.WriteLine(mvc.ToString());
         }
 
         //**************************************************************************************

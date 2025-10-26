@@ -20,10 +20,10 @@ namespace QUIZ_APP.Controllers
             /*
             QuizSelect dq = new QuizSelect();
             QuizMVC mvc = new QuizMVC();
-            mvc.QuizIndex = dq.list.Count + 1;
+           
             mvc.AddMVC();
             QuizMVC js = new QuizMVC();
-            js.QuizIndex = dq.list.Count + 1;
+           
             js.AddJS();
 
             dq.Add(mvc);dq.Add(js);

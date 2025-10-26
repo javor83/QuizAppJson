@@ -25,13 +25,16 @@
 
         public override string ToString()
         {
+            string answer_as = $"Answered {this.Answer} | Asnwer letter {this.AnswerLetter}";
+            
+
             if (this.Correct)
             {
-                return $"{this.Letter.ToString()}. {this.QuestionText} (X)";
+                return $"{this.Letter.ToString()}. {this.QuestionText} (X) | {answer_as}";
             }
             else
             {
-                return $"{this.Letter.ToString()}. {this.QuestionText} (-)";
+                return $"{this.Letter.ToString()}. {this.QuestionText} (-) | {answer_as}";
             }
 
 
