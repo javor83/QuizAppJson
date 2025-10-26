@@ -280,6 +280,18 @@ namespace QUIZ_APP.Models
             }
         }
         //************************************************************************************
+        public int CountAsCorrect()
+        {
+            int result = 0;
+            foreach (var k in this.quiz_questions)
+            {
+                result += k.CountAsCorrect();
+            }
+            return result;
+        }
+
+
+        //************************************************************************************
 
         public void Add
             (
@@ -297,7 +309,7 @@ namespace QUIZ_APP.Models
             {
                 qlist.AddOption(question);
             }
-            quiz_questions.Add(qlist);
+            this.quiz_questions.Add(qlist);
         }
         //************************************************************************************
 

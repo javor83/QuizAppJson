@@ -1,23 +1,6 @@
 ﻿@model QuizMVC
 <h1 class="text-center">@captions.AnswerList</h1>
-<table border="1" class="table table-bordered table-hover">
-    <tr>
-        <th>@captions.QLetter</th>
-        <th>@captions.QText</th>
-        <th>@captions.QAnsweredLetter</th>
-    </tr>
-@foreach (var k in Model.CountCorrect())
-{
-     
-         <tr>
-             <td>@k.Letter</td>
-             <td>@k.QuestionText</td>
-             <td>@k.AnswerLetter</td>
-           
-         </tr>
-     
-}
-</table>
+<h3>@captions.CountCorrect : @Model.CountAsCorrect()</h3>
 <div class="text-center">
     <form asp-antiforgery="true" method="post" asp-controller="Home" asp-action="Reset">
         <input type="submit" value="@captions.ResetAnswer" class="btn btn-primary d-inline"/>

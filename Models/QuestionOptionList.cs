@@ -14,6 +14,16 @@ namespace QUIZ_APP.Models
             }
         }
         //************************************************************************************
+        public int CountAsCorrect()
+        {
+            var query = from x in this.data_questions
+                        where x.CountAsCorrect() == true
+                        select x;
+
+            int result = query.Count();
+            return result;
+        }
+        //************************************************************************************
         public void SetLetter(enum_LetterOption selected)
         {
             OptionsInQuestion query = this.data_questions.Where(x => x.Letter == selected).First();

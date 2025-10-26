@@ -10,6 +10,7 @@
         public const string SendAnswer = "Отговори на въпроса";
 
         public const string AnswerList = "Правилни отговори";
+        public const string CountCorrect = "Брой правилни отговори";
 
         public const string QLetter = "Буква";
         public const string QText = "Въпрос";

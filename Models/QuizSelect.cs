@@ -101,7 +101,7 @@ namespace QUIZ_APP.Models
                         //------------------
                         QuizID = quiz_id.Value,
                         QuizTitle = quiz.QuizTitle,
-                        SelectedLetter = question.data_questions.First().Letter
+                        SelectedLetter = question.data_questions.Last().Letter
                     };
                     if (result.QuestionID == total-1)
                     {

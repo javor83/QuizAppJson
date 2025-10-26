@@ -2,12 +2,29 @@
 {
     public class OptionsInQuestion
     {
+
+        //************************************************************************************
         public void ResetAnswer()
         {
             this.Answer = false;
             this.AnswerLetter = enum_LetterOption.None;
         }
-        
+        //************************************************************************************
+        public bool CountAsCorrect()
+        {
+            bool result = false;
+
+            if (this.Answer)
+            {
+                //трябва да е изпратен отговор
+                result = this.Correct && this.AnswerLetter == this.Letter;
+
+            }
+
+            return result;
+        }
+        //************************************************************************************
+
         public bool Answer { get; set; } = false;
         //************************************************************************************
         public enum_LetterOption AnswerLetter { get; set; } = enum_LetterOption.None;
