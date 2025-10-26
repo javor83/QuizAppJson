@@ -3,6 +3,16 @@
     public class OptionsInQuestion
     {
 
+        public bool MatchAnswerLetter()
+        {
+            bool result = false;
+            if (this.Answer)
+            {
+                //трябва да е изпратен отговор
+                result = this.Letter == this.AnswerLetter && this.Correct == false;
+            }
+            return result;
+        }
         //************************************************************************************
         public void ResetAnswer()
         {

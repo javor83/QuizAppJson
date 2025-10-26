@@ -56,7 +56,10 @@ namespace QUIZ_APP.Models
 
 
         }
-
+        public bool OptionsAsSuccess()
+        {
+            return this.data_questions.Any(x => x.CountAsCorrect());
+        }
         //************************************************************************************
         //възможни отговори...
         public List<OptionsInQuestion> data_questions { get; set; } = new List<OptionsInQuestion>();

@@ -13,21 +13,52 @@
             <p>
                 @k.HeaderIndex. @k.HeaderText
             </p>
-            <ul>
-                @foreach (OptionsInQuestion question in k.data_questions)
-                {
-                    @if (question.CountAsCorrect())
+            @if (k.OptionsAsSuccess())
+            {
+                //изписваме успешния отговор
+                <ul>
+                    @foreach (OptionsInQuestion question in k.data_questions)
                     {
-                        <li class="text-success">@question.Letter. @question.QuestionText</li>
-                    }
-                    else
-                    {
-                        <li class="text-danger">@question.Letter. @question.QuestionText</li>
-                    }
-                }
+                        @if (question.CountAsCorrect())
+                        {
+                            <li class="text-success">@question.Letter. @question.QuestionText</li>
+                        }else
+                        {
+                            <li>@question.Letter. @question.QuestionText</li>
+                        }
 
-            </ul>
+                    }
+
+                </ul>
+            }else
+            {
+                <ul>
+                    @foreach (OptionsInQuestion question in k.data_questions)
+                    {
+                        if (question.Correct)
+                        {
+                            //изписваме правилния отговор
+                            <li class="text-success">@question.Letter. @question.QuestionText</li>
+                        }
+                        else
+                        if (question.MatchAnswerLetter())
+                        {
+                            //изписваме отговорения
+                            <li class="text-danger fw-bold">@question.Letter. @question.QuestionText</li>
+                        }
+                        else
+                        {
+                                //изписваме останалите възможности
+                            <li>@question.Letter. @question.QuestionText</li>
+                        }
+                    }
+
+                </ul>                
+            }
+
+
         }
+            
         break;
         case enum_Rating.Great:
         <p class="alert alert-success">
