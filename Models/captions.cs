@@ -14,6 +14,8 @@
         public const string CountInCorrect = "Брой неправилни отговори";
         public const string RatingOK = "Отлична работа !";
         public const string RatingFail = "Има нужда от още работа";
+        public const string Skip = "Пропуснат въпрос";
+
         
     }
 }

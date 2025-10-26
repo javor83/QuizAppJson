@@ -6,6 +6,13 @@ namespace QUIZ_APP.Models
     {
 
         //************************************************************************************
+        public bool Skip()
+        {
+            bool result =
+                this.data_questions.All(x => x.Answer == false && x.AnswerLetter == enum_LetterOption.None);
+            return result;
+        }
+        //************************************************************************************
         public void ResetAnswer()
         {
             for(int i = 0;i<this.data_questions.Count;i++)

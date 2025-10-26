@@ -10,9 +10,20 @@
         </p>
         foreach (QuestionOptionList k in Model.quiz_questions)
         {
-            <p>
-                @k.HeaderIndex. @k.HeaderText
-            </p>
+            @if (k.Skip())
+            {
+                <p>
+                    @k.HeaderIndex. @k.HeaderText <span class="text-danger fw-bold">@captions.Skip</span>
+                </p>
+            }
+            else
+            {
+                <p>
+                    @k.HeaderIndex. @k.HeaderText
+                </p>
+            }
+
+            
             @if (k.OptionsAsSuccess())
             {
                 //изписваме успешния отговор
