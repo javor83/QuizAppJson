@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QUIZ_APP.Models;
 
 namespace QUIZ_APP.Controllers
@@ -18,6 +18,8 @@ namespace QUIZ_APP.Controllers
         //***********************************************************************************
         public IActionResult Index()
         {
+            
+            //този код служи за генериране на нов файс въпроси
             /*
             QuizSelect dq = new QuizSelect();
             QuizMVC mvc = new QuizMVC();
@@ -106,6 +108,7 @@ namespace QUIZ_APP.Controllers
         public IActionResult Reset()
         {
             this.qselect.ResetAnswer();
+          
             return RedirectToAction("Index", "Home");
         }
         #endregion

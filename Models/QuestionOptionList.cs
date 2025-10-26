@@ -53,9 +53,8 @@ namespace QUIZ_APP.Models
         {
             var query = this.data_questions.Any(x=>x.Answer == true);
             return query;
-
-
         }
+        //************************************************************************************
         public bool OptionsAsSuccess()
         {
             return this.data_questions.Any(x => x.CountAsCorrect());

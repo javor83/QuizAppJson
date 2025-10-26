@@ -13,5 +13,7 @@
         void SendAnswer(QuestionDetails sender);
 
         QuizMVC Find(int? id);
+
+       
     }
 }

@@ -21,10 +21,10 @@
                     {
                         @if (question.CountAsCorrect())
                         {
-                            <li class="text-success">@question.Letter. @question.QuestionText</li>
+                            <li class="text-success"><b>@question.Letter.</b> @question.QuestionText</li>
                         }else
                         {
-                            <li>@question.Letter. @question.QuestionText</li>
+                            <li><b>@question.Letter.</b> @question.QuestionText</li>
                         }
 
                     }
@@ -38,7 +38,7 @@
                         if (question.Correct)
                         {
                             //изписваме правилния отговор
-                            <li class="text-success">@question.Letter. @question.QuestionText</li>
+                            <li class="text-success"><b>@question.Letter.</b> @question.QuestionText</li>
                         }
                         else
                         if (question.MatchAnswerLetter())
@@ -48,8 +48,8 @@
                         }
                         else
                         {
-                                //изписваме останалите възможности
-                            <li>@question.Letter. @question.QuestionText</li>
+                            //изписваме останалите възможности
+                            <li><b>@question.Letter.</b> @question.QuestionText</li>
                         }
                     }
 

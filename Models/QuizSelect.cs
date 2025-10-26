@@ -11,13 +11,18 @@ namespace QUIZ_APP.Models
         public QuizSelect()
         {
             
+            
+            List<QuizMVC> json = this.Deserialize();
+           
+
+
             this.list = new List<QuizMVC>();
-            var json = this.Deserialize();
             this.list.AddRange(json);
+            
             
         }
         #region privates
-        
+       
         //**************************************************************************************
         public void Add(QuizMVC sender)
         {
@@ -37,6 +42,8 @@ namespace QUIZ_APP.Models
             return result;
         }
         #endregion
+        
+
         //**************************************************************************************
         QuizMVC IQuizSelect.Find(int? id)
         {
@@ -77,7 +84,9 @@ namespace QUIZ_APP.Models
             for(int i = 0;i<this.list.Count;i++)
             {
                 this.list.ElementAt(i).ResetAnswer();
+                this.list.ElementAt(i).Shuffle();
             }
+           
         }
 
         //**************************************************************************************

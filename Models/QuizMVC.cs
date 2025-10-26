@@ -4,7 +4,19 @@ namespace QUIZ_APP.Models
 {
     public class QuizMVC
     {
+        public void Shuffle()
+        {
+            QuestionOptionList[] data = this.quiz_questions.ToArray();
 
+            Random.Shared.Shuffle<QuestionOptionList>(data);
+            for (int i = 0; i < data.Length; i++)
+            {
+                data.ElementAt(i).HeaderIndex = i + 1;
+            }
+            this.quiz_questions.Clear();
+            this.quiz_questions.AddRange(data);
+
+        }
         //************************************************************************************
         public IEnumerable<OptionsInQuestion> CountCorrect()
         {
@@ -18,6 +30,67 @@ namespace QUIZ_APP.Models
 
 
             this.QuizTitle = "Quiz MVC";
+
+            this.Add
+                (
+                    "Which of following is TRUE?",
+                    new OptionsInQuestion()
+                    {
+                        Letter = enum_LetterOption.A,
+                        Correct = true,
+                        QuestionText = "The controller redirects incoming request to model."
+                    },
+                     new OptionsInQuestion()
+                     {
+                         Letter = enum_LetterOption.B,
+                         Correct = false,
+                         QuestionText = "The controller executes an incoming request."
+                     },
+                      new OptionsInQuestion()
+                      {
+                          Letter = enum_LetterOption.C,
+                          Correct = false,
+                          QuestionText = "The controller controls the data."
+                      },
+                       new OptionsInQuestion()
+                       {
+                           Letter = enum_LetterOption.D,
+                           Correct = false,
+                           QuestionText = "The controller render html to view."
+                       }
+                );
+
+
+            this.Add
+                (
+                    "MVC stands for ______.",
+                    new OptionsInQuestion()
+                    {
+                        Letter = enum_LetterOption.A,
+                        Correct = true,
+                        QuestionText = "Model, View & Controller",
+                    },
+                    new OptionsInQuestion()
+                    {
+                        Letter = enum_LetterOption.B,
+                        Correct = false,
+                        QuestionText = "Model, Vision & Control",
+                    },
+                    new OptionsInQuestion()
+                    {
+                        Letter = enum_LetterOption.C,
+                        Correct = false,
+                        QuestionText = "Model, ViewData & Controller",
+                    },
+                    new OptionsInQuestion()
+                    {
+                        Letter = enum_LetterOption.D,
+                        Correct = false,
+                        QuestionText = "Model, Data & Controller",
+                    }
+
+                );
+
 
             this.Add
                 (
