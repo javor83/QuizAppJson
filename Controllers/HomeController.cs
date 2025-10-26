@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using QUIZ_APP.Models;
 
@@ -6,14 +5,16 @@ namespace QUIZ_APP.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+      
         private readonly IQuizSelect qselect = null;
         //***********************************************************************************
-        public HomeController(ILogger<HomeController> logger,IQuizSelect quiz)
+        public HomeController(IQuizSelect quiz)
         {
             this.qselect = quiz;
-            this._logger = logger;
+            
         }
+        //***********************************************************************************
+        #region get query
         //***********************************************************************************
         public IActionResult Index()
         {
@@ -38,24 +39,19 @@ namespace QUIZ_APP.Controllers
             return View(this.qselect.GetAll());
         }
         //***********************************************************************************
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult SendAnswer(QuestionDetails sender)
+        public IActionResult Details(int? quiz_id, int? question_id = 0)
         {
-            this.qselect.SendAnswer(sender);
-            if (sender.IsFinished())
+            QuestionDetails item = this.qselect.GetQuestion(quiz_id, question_id);
+
+
+            if (item == null)
             {
-                return RedirectToAction("Print", "Home",new { quiz_id = sender.QuizID });
-            }else
-
-                return RedirectToAction("Details", "Home",
-                    new
-                    {
-                        quiz_id = sender.QuizID,
-                        question_id = sender.NextQuestionID
-                    }
-                    );
-
+                return NotFound("element found");
+            }
+            else
+            {
+                return View(item);
+            }
         }
         //***********************************************************************************
         public IActionResult Print(int? quiz_id)
@@ -77,8 +73,33 @@ namespace QUIZ_APP.Controllers
                 return NotFound("not found");
             }
 
-                
+
         }
+        #endregion
+        //***********************************************************************************
+
+        #region post query
+        //***********************************************************************************
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SendAnswer(QuestionDetails sender)
+        {
+            this.qselect.SendAnswer(sender);
+            if (sender.IsFinished())
+            {
+                return RedirectToAction("Print", "Home",new { quiz_id = sender.QuizID });
+            }else
+
+                return RedirectToAction("Details", "Home",
+                    new
+                    {
+                        quiz_id = sender.QuizID,
+                        question_id = sender.NextQuestionID
+                    }
+                    );
+
+        }
+        
         //***********************************************************************************
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -87,33 +108,7 @@ namespace QUIZ_APP.Controllers
             this.qselect.ResetAnswer();
             return RedirectToAction("Index", "Home");
         }
-
-        //***********************************************************************************
-        public IActionResult Details(int? quiz_id,int? question_id=0)
-        {
-            QuestionDetails item = this.qselect.GetQuestion(quiz_id, question_id);
-           
-
-            if (item == null)
-            {
-                return NotFound("element found");
-            }
-            else
-            {
-                return View(item);
-            }
-        }
-        //***********************************************************************************
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        //***********************************************************************************
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        #endregion
         //***********************************************************************************
     }
 }
