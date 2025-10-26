@@ -19,5 +19,7 @@
 }
 </table>
 <div class="text-center">
-    <a asp-controller="Home" asp-action="Index" class="btn btn-primary d-inline">@captions.ResetAnswer</a>
+    <form asp-antiforgery="true" method="post" asp-controller="Home" asp-action="Reset">
+        <input type="submit" value="@captions.ResetAnswer" class="btn btn-primary d-inline"/>
+    </form>
 </div>
